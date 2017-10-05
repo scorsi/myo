@@ -42,7 +42,7 @@ class Main extends Sprite
 			this.initialize();
 		#end
 	}
-
+	
 	public function initialize() : Void
 	{
 		this.engine = new Engine(this);
@@ -61,6 +61,7 @@ class Main extends Sprite
 			if (this.canUpdateEngine)
 			{
 				this.isGameValid = this.engine.update();
+				
 				this.canUpdateEngine = false;
 				Timer.delay(function () {
 					this.canUpdateEngine = true;
