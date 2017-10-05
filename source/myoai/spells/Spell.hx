@@ -21,8 +21,12 @@ class Spell
 	public function new(name:String = "spell", target:Character = null)
 	{
 		this.name = name;
-		
 		this.target = target;
+		
+		this.manaCost = 0;
+		this.damage = 0;
+		this.turnWait = 0;
+		this.turnRemaining = 0;
 	}
 	
 	//////
