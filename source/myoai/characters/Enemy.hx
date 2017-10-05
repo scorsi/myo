@@ -1,11 +1,13 @@
 package myoai.characters;
 
-import myoai.actions.ActionType;
-import myoai.spells.Heal;
+import myoai.Manager;
+import myoai.Engine;
+
+import myoai.ActionType;
+import myoai.SpellType;
+import myoai.WeaponType;
 import myoai.spells.Spell;
-import myoai.spells.Fireball;
-import myoai.weapons.Shield;
-import myoai.weapons.Sword;
+import myoai.weapons.Weapon;
 
 /**
  * ...
@@ -13,12 +15,14 @@ import myoai.weapons.Sword;
  */
 class Enemy extends Character 
 {
-
+	
 	public function new() 
 	{
 		super("enemy", 0, 50, 30);
 		
-		this.equipWeapons(new Sword(), new Shield());
+		this.equipWeapons(
+			Manager.getWeapon(WeaponType.Sword),
+			Manager.getWeapon(WeaponType.Shield));
 	}
 	
 	override private function beginStage(number:Int) : Void 
@@ -29,23 +33,15 @@ class Enemy extends Character
 	
 	override private function playTurn() : ActionType 
 	{
+		super.playTurn();
 		var player:Character = Engine.getPlayer();
 		
 		if (this.isCasting)
 			return ActionType.Wait;
 		
-		var spell:Spell;
-		if (this.health <= this.maxHealth / 3)
-		{
-			spell = new Heal(this);
-		}
-		else
-		{
-			spell = new Fireball(player);
-		}
-		
+		var spell:Spell = Manager.getSpell(SpellType.Fireball);
 		if (spell != null && this.canUseSpell(spell))
-			return ActionType.Cast(spell);
+			return ActionType.Cast(spell, player);
 		
 		return ActionType.Attack;
 	}

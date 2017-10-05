@@ -1,5 +1,6 @@
-package myoai.actions;
+package myoai;
 
+import myoai.characters.Character;
 import myoai.spells.Spell;
 import myoai.weapons.Weapon;
 
@@ -11,6 +12,6 @@ enum ActionType
 	Wait;
 	Attack;
 	Defend;
-	Cast(spell:Spell);
+	Cast(spell:Spell, target:Character);
 	Equip(rightWeapon:Weapon, leftWeapon:Weapon);
 }

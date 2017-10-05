@@ -10,9 +10,9 @@ import myoai.spells.Spell;
 class Fireball extends Spell
 {
 	
-	public function new(target:Character)
+	public function new()
 	{
-		super("fireball", target);
+		super("fireball");
 		
 		this.setDamage(25);
 		this.setManaCost(25);

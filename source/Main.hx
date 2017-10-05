@@ -13,7 +13,7 @@ import myoai.Engine;
  */
 class Main extends Sprite
 {
-
+	
 	static function main()
 	{
 		Lib.current.stage.align = openfl.display.StageAlign.TOP_LEFT;

@@ -1,6 +1,6 @@
 package myoai.characters;
 
-import myoai.actions.ActionType;
+import myoai.ActionType;
 import myoai.spells.Spell;
 import myoai.weapons.Weapon;
 
@@ -32,6 +32,8 @@ class Character
 	
 	// Spell
 	private var castingSpell : Spell;
+	private var castRemainingTurn : Int;
+	private var castTarget : Character;
 	
 	// Weapons
 	private var rightEquipedWeapon : Weapon;
@@ -87,6 +89,8 @@ class Character
 	
 	private function playTurn() : ActionType
 	{
+		if (this.isCasting)
+			this.castRemainingTurn--;
 		return ActionType.Wait;
 	} // playTurn
 	
@@ -117,13 +121,15 @@ class Character
 		}
 	} // equipWeapon
 	
-	private function startCasting(spell:Spell) : Bool
+	private function startCasting(spell:Spell, target:Character) : Bool
 	{
 		this.stopCasting();
 		if (this.mana >= spell.getManaCost())
 		{
 			this.useMana(spell.getManaCost());
 			this.castingSpell = spell;
+			this.castRemainingTurn = spell.getTurnWait();
+			this.castTarget = target;
 			this.isCasting = true;
 		}
 		return this.isCasting;
@@ -134,6 +140,16 @@ class Character
 		this.isCasting = false;
 		this.castingSpell = null;
 	} // stopCasting
+	
+	private function isCastFinished() : Bool
+	{
+		return (this.castRemainingTurn <= 0);
+	} // isCastFinished
+	
+	private function getCastTarget() : Character
+	{
+		return this.castTarget;
+	} // getCastTarget
 	
 	private function startDefending() : Void
 	{

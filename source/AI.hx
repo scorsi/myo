@@ -1,7 +1,13 @@
 package;
 
-import myoai.actions.ActionType;
+import myoai.Manager;
 import myoai.Engine;
+
+import myoai.ActionType;
+import myoai.SpellType;
+import myoai.WeaponType;
+import myoai.spells.Spell;
+import myoai.weapons.Weapon;
 
 /**
  * The user AI implementation.

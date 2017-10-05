@@ -5,7 +5,7 @@ import myoai.characters.Enemy;
 import myoai.characters.Player;
 import myoai.spells.Spell;
 import myoai.weapons.Weapon;
-import myoai.actions.ActionType;
+import myoai.ActionType;
 
 import openfl.text.TextField;
 import openfl.text.TextFormat;
@@ -32,7 +32,7 @@ class Engine
 	
 	private var stage : Int;
 	private var isStageStarted : Bool;
-	private var isPlayerTurn : Bool = true;
+	private var isPlayerTurn : Bool;
 	
 	private var playerTitleText : TextField;
 	private var playerInfoText : TextField;
@@ -48,6 +48,9 @@ class Engine
 	public function new(main:Main) 
 	{
 		this.main = main;
+		
+		Manager.initialize();
+		
 		Engine.player = new Player();
 		Engine.enemy = new Enemy();
 	} // new
@@ -103,23 +106,19 @@ class Engine
 		switch (action) 
 		{
 			case ActionType.Wait :
-				if (caster.getIsCasting())
+				if (caster.getIsCasting() && caster.isCastFinished())
 				{
 					var spell:Spell = caster.getCastingSpell();
-					spell.nextTurn();
-					if (spell.isCastFinished())
-					{
-						var target:Character = spell.getTarget();
-						target.reduceHealth(spell.getDamage());
-						caster.stopCasting();
-					}
+					var target:Character = caster.getCastTarget();
+					target.reduceHealth(spell.getDamage());
+					caster.stopCasting();
 				}
 			case ActionType.Attack :
 				target.reduceHealth(caster.getActualDamage());
 			case ActionType.Defend :
 				caster.startDefending();
-			case ActionType.Cast(spell) :
-				caster.startCasting(spell);
+			case ActionType.Cast(spell, target) :
+				caster.startCasting(spell, target);
 			case ActionType.Equip(rightWeapon, leftWeapon) :
 				caster.equipWeapons(rightWeapon, leftWeapon);
 		}
@@ -135,8 +134,8 @@ class Engine
 				textField.text = "Attacks";
 			case ActionType.Defend :
 				textField.text = "Defends";
-			case ActionType.Cast(spell) :
-				textField.text = 'Casts ${spell.getName()}';
+			case ActionType.Cast(spell, target) :
+				textField.text = 'Casts ${spell.getName()} to ${target.getName()}';
 			case ActionType.Equip(rightWeapon, leftWeapon) :
 				if (leftWeapon != null)
 					textField.text = 'Equips ${rightWeapon.getName()} and ${leftWeapon.getName()}';

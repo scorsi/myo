@@ -1,7 +1,7 @@
 package myoai.characters;
 
 import AI;
-import myoai.actions.ActionType;
+import myoai.ActionType;
 
 /**
  * ...
@@ -31,6 +31,7 @@ class Player extends Character
 	
 	override private function playTurn() : ActionType 
 	{
+		super.playTurn();
 		return this.logic.playTurn();
 	}
 	

@@ -10,9 +10,9 @@ import myoai.spells.Spell;
 class Heal extends Spell
 {
 	
-	public function new(target:Character) 
+	public function new() 
 	{
-		super("heal", target);
+		super("heal");
 		
 		this.setDamage(-40);
 		this.setManaCost(10);
