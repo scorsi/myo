@@ -1,6 +1,7 @@
 package myoai.characters;
 
 import myoai.actions.ActionType;
+import myoai.spells.Heal;
 import myoai.spells.Spell;
 import myoai.spells.Fireball;
 
@@ -32,7 +33,7 @@ class Enemy extends Character
 		var spell:Spell;
 		if (this.health <= this.maxHealth / 3)
 		{
-			spell = null;
+			spell = new Heal(this);
 		}
 		else
 		{
