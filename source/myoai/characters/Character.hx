@@ -14,14 +14,14 @@ class Character
 	
 	private var name : String;
 	
-	// Default character parameters
+	// Default character properties
 	private var standardDamage : Int;
 	private var standardHealth : Int;
 	private var standardMana : Int;
 	private var standardHealthPerStage : Int;
 	private var standardManaPerSatge : Int;
 	
-	// Actual character parameters
+	// Actual character properties
 	private var damage : Int;
 	private var maxHealth : Int;
 	private var maxMana : Int;
@@ -30,8 +30,12 @@ class Character
 	private var health : Int;
 	private var mana : Int;
 	
+	// Spell
 	private var castingSpell : Spell;
-	private var equipedWeapon : Weapon;
+	
+	// Weapons
+	private var rightEquipedWeapon : Weapon;
+	private var leftEquipedWeapon : Weapon;
 	
 	// Special actions
 	private var isDefending : Bool;
@@ -51,7 +55,8 @@ class Character
 		this.standardManaPerSatge = manaPerStage;
 		
 		this.castingSpell = null;
-		this.equipedWeapon = null;
+		this.rightEquipedWeapon = null;
+		this.leftEquipedWeapon = null;
 	} // new
 	
 	// Set all variables to default 
@@ -98,6 +103,20 @@ class Character
 		return this.health <= 0;
 	} // isDead
 	
+	private function equipWeapons(rightWeapon:Weapon, ?leftWeapon:Weapon = null) : Void
+	{
+		if (rightWeapon.isTwoHanded() || (leftWeapon != null && leftWeapon.isTwoHanded()))
+		{
+			this.rightEquipedWeapon = rightWeapon;
+			this.leftEquipedWeapon = null;
+		}
+		else
+		{
+			this.rightEquipedWeapon = rightWeapon;
+			this.leftEquipedWeapon = leftWeapon;
+		}
+	} // equipWeapon
+	
 	private function startCasting(spell:Spell) : Bool
 	{
 		this.stopCasting();
@@ -142,6 +161,16 @@ class Character
 		}
 	} // reduceHealth
 	
+	public function getActualDamage() : Int
+	{
+		var dmg:Int = this.damage;
+		if (this.rightEquipedWeapon != null)
+			dmg += this.rightEquipedWeapon.getDamage();
+		if (this.leftEquipedWeapon != null)
+			dmg += this.leftEquipedWeapon.getDamage();
+		return dmg;
+	}
+	
 	private function useMana(amount:Int) : Bool
 	{
 		if (this.mana - amount < 0)
@@ -171,7 +200,8 @@ class Character
 	public function getHealthPerStage() : Int 								{ return this.healthPerStage; }
 	public function getManaPerStage() : Int 								{ return this.manaPerStage; }
 	public function getCastingSpell() : Spell								{ return this.castingSpell; }
-	public function getEquipedWeapon() : Weapon								{ return this.equipedWeapon; }
+	public function getRightEquipedWeapon() : Weapon						{ return this.rightEquipedWeapon; }
+	public function getLeftEquipedWeapon() : Weapon							{ return this.leftEquipedWeapon; }
 	public function getIsCasting() : Bool									{ return this.isCasting; }
 	public function getIsDefending() : Bool									{ return this.isDefending; }
 	

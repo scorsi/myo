@@ -12,5 +12,5 @@ enum ActionType
 	Attack;
 	Defend;
 	Cast(spell:Spell);
-	Equip(weapon:Weapon);
+	Equip(rightWeapon:Weapon, leftWeapon:Weapon);
 }

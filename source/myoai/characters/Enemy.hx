@@ -16,12 +16,14 @@ class Enemy extends Character
 
 	public function new() 
 	{
-		super("enemy", 5, 50, 30);
+		super("enemy", 0, 50, 30);
 		
+		this.equipWeapons(new Sword(), new Shield());
 	}
 	
 	override private function beginStage(number:Int) : Void 
 	{
+		// Never called.
 		// Don't call to parent function because enemies don't live more than 1 stage.
 	}
 	
