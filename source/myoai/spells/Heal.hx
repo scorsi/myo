@@ -9,7 +9,7 @@ import myoai.spells.Spell;
  */
 class Heal extends Spell
 {
-
+	
 	public function new(target:Character) 
 	{
 		super("heal", target);

@@ -7,7 +7,6 @@ import myoai.spells.Spell;
  * ...
  * @author Sylvain Corsini
  */
-@:allow(myoai.Engine)
 class Fireball extends Spell
 {
 	

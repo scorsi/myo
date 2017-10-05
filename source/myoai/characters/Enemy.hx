@@ -4,18 +4,20 @@ import myoai.actions.ActionType;
 import myoai.spells.Heal;
 import myoai.spells.Spell;
 import myoai.spells.Fireball;
+import myoai.weapons.Shield;
+import myoai.weapons.Sword;
 
 /**
  * ...
  * @author Sylvain Corsini
  */
-@:allow(myoai.Engine)
 class Enemy extends Character 
 {
 
 	public function new() 
 	{
 		super("enemy", 5, 50, 30);
+		
 	}
 	
 	override private function beginStage(number:Int) : Void 

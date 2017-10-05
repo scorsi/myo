@@ -7,7 +7,6 @@ import myoai.actions.ActionType;
  * ...
  * @author Sylvain Corsini
  */
-@:allow(myoai.Engine)
 class Player extends Character 
 {
 
