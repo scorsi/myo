@@ -64,7 +64,7 @@ class Main extends Sprite
 				this.canUpdateEngine = false;
 				Timer.delay(function () {
 					this.canUpdateEngine = true;
-				}, 500);
+				}, 750);
 			}
 		}
 	}
