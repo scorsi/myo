@@ -102,8 +102,6 @@ class Engine
 		caster.stopDefending();
 		switch (action) 
 		{
-			case ActionType.Unknown :
-				// Do something ?
 			case ActionType.Wait :
 				if (caster.getIsCasting())
 				{
@@ -131,8 +129,6 @@ class Engine
 	{
 		switch (action) 
 		{
-			case ActionType.Unknown :
-				textField.text = "...";
 			case ActionType.Wait :
 				textField.text = "...";
 			case ActionType.Attack :
