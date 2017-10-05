@@ -21,7 +21,7 @@ class AI
 	
 	public function playTurn() : ActionType
 	{
-		return ActionType.Unknown;
+		return ActionType.Wait;
 	}
 	
 }

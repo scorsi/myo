@@ -8,7 +8,6 @@ import myoai.weapons.Weapon;
  */
 enum ActionType 
 {
-	Unknown;
 	Wait;
 	Attack;
 	Defend;
