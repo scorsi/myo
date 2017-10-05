@@ -82,7 +82,7 @@ class Character
 	
 	private function playTurn() : ActionType
 	{
-		return ActionType.Unknown;
+		return ActionType.Wait;
 	} // playTurn
 	
 	//////
