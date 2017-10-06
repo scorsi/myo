@@ -224,6 +224,7 @@ class Character
 	//////
 	// Setters
 	
+	private function setDamage(newDamage:Int) : Void						{ this.damage = newDamage; }
 	private function setHealth(newHealth:Int) : Void						{ this.health = newHealth; }
 	private function setMana(newMana:Int) : Void							{ this.mana = newMana; }
 	private function setMaxHealth(newMaxHealth:Int) : Void					{ this.maxHealth = newMaxHealth; }

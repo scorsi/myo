@@ -14,9 +14,9 @@ class Heal extends Spell
 	{
 		super("heal");
 		
-		this.setDamage(-40);
+		this.setDamage(-30);
 		this.setManaCost(10);
-		this.setTurnWait(2);
+		this.setTurnWait(1);
 	}
 	
 }

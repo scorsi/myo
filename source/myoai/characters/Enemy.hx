@@ -18,17 +18,24 @@ class Enemy extends Character
 	
 	public function new() 
 	{
-		super("enemy", 0, 50, 30);
+		super("enemy");
 		
 		this.equipWeapons(
 			Manager.getWeapon(WeaponType.Sword),
 			Manager.getWeapon(WeaponType.Shield));
 	}
 	
-	override private function beginStage(number:Int) : Void 
+	override private function beginStage(stage:Int) : Void 
 	{
-		// Never called.
-		// Don't call to parent function because enemies don't live more than 1 stage.
+		var damage = Std.int((10 + (stage * 2)) / 3);
+		var health = Std.int(50 + (stage / .33));
+		var mana = Std.int(30 + (stage / 2));
+		
+		this.setDamage(damage);
+		this.setHealth(health);
+		this.setMaxHealth(health);
+		this.setMana(mana);
+		this.setMaxMana(mana);
 	}
 	
 	override private function playTurn() : ActionType 

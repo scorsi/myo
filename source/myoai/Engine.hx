@@ -156,7 +156,7 @@ class Engine
 		this.stage++;
 		this.stageText.text = 'Stage: ${this.stage}';
 		Engine.player.beginStage(this.stage);
-		Engine.enemy.initialize();
+		Engine.enemy.beginStage(this.stage);
 		this.isStageStarted = true;
 	} // startStage
 	
@@ -166,7 +166,8 @@ class Engine
 		{
 			infoText.text =
 				'Health: ${character.getHealth()} / ${character.getMaxHealth()}\n' +
-				'Mana: ${character.getMana()} / ${character.getMaxMana()}\n';
+				'Mana: ${character.getMana()} / ${character.getMaxMana()}\n' +
+				'Damage: ${character.getActualDamage()}\n';
 			if (character.getRightEquipedWeapon() != null)
 				infoText.text += 'Right Weapon: ${character.getRightEquipedWeapon().getName()}\n';
 			if (character.getLeftEquipedWeapon() != null)
