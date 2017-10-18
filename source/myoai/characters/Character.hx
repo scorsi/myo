@@ -20,6 +20,7 @@ class Character
 	private var standardMana : Int;
 	private var standardHealthPerStage : Int;
 	private var standardManaPerSatge : Int;
+	private var standardNbrOfStrongAttack : Int;
 	
 	// Actual character properties
 	private var damage : Int;
@@ -29,6 +30,7 @@ class Character
 	private var manaPerStage : Int;
 	private var health : Int;
 	private var mana : Int;
+	private var nbrOfStrongAttack : Int;
 	
 	// Spell
 	private var castingSpell : Spell;
@@ -38,6 +40,7 @@ class Character
 	// Weapons
 	private var rightEquipedWeapon : Weapon;
 	private var leftEquipedWeapon : Weapon;
+	private var strongAttack : Int;
 	
 	// Special actions
 	private var isDefending : Bool;
@@ -47,7 +50,7 @@ class Character
 	//////
 	// Methods
 	
-	public function new(name:String, damage:Int = 10, health:Int = 100, mana:Int = 100, healthPerStage:Int = 10, manaPerStage:Int = 25)
+	public function new(name:String, damage:Int = 10, health:Int = 100, mana:Int = 100, healthPerStage:Int = 10, manaPerStage:Int = 25, strongAttack:Int = 2)
 	{
 		this.name = name;
 		this.standardDamage = damage;
@@ -55,6 +58,7 @@ class Character
 		this.standardMana = mana;
 		this.standardHealthPerStage = healthPerStage;
 		this.standardManaPerSatge = manaPerStage;
+		this.standardNbrOfStrongAttack = strongAttack;
 		
 		this.castingSpell = null;
 		this.rightEquipedWeapon = null;
@@ -71,6 +75,7 @@ class Character
 		this.maxMana = this.standardMana;
 		this.healthPerStage = this.standardHealthPerStage;
 		this.manaPerStage = this.standardManaPerSatge;
+		this.strongAttack = this.standardNbrOfStrongAttack;
 		
 		return true;
 	} // initialize
@@ -84,6 +89,8 @@ class Character
 			
 			this.mana += this.manaPerStage;
 			if (this.mana > this.maxMana) this.mana = this.maxMana;
+			
+			this.strongAttack = this.standardNbrOfStrongAttack;
 		}
 	} // beginStage
 	
@@ -177,10 +184,15 @@ class Character
 		}
 	} // reduceHealth
 	
+		public function decreaseNbrOfStrongAttack() : Void
+		{
+			this.strongAttack--;
+		}
+	
 	public function getActualDamage() : Int
 	{
 		var dmg:Int = this.damage;
-		if (this.rightEquipedWeapon != null)
+		if (this.rightEquipedWeapon != null && ((this.rightEquipedWeapon.isTwoHanded() && getNbrOfStrongAttackLeft() > 0) || !this.rightEquipedWeapon.isTwoHanded()))
 			dmg += this.rightEquipedWeapon.getDamage();
 		if (this.leftEquipedWeapon != null)
 			dmg += this.leftEquipedWeapon.getDamage();
@@ -220,6 +232,7 @@ class Character
 	public function getLeftEquipedWeapon() : Weapon							{ return this.leftEquipedWeapon; }
 	public function getIsCasting() : Bool									{ return this.isCasting; }
 	public function getIsDefending() : Bool									{ return this.isDefending; }
+	public function getNbrOfStrongAttackLeft() : Int						{ return this.strongAttack; }
 	
 	//////
 	// Setters
