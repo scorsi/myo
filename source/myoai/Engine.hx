@@ -115,6 +115,7 @@ class Engine
 				}
 			case ActionType.Attack :
 				target.reduceHealth(caster.getActualDamage());
+				caster.decreaseNbrOfStrongAttack();
 			case ActionType.Defend :
 				caster.startDefending();
 			case ActionType.Cast(spell, target) :

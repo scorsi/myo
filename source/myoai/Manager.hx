@@ -4,6 +4,7 @@ import myoai.WeaponType;
 import myoai.weapons.Weapon;
 import myoai.weapons.Shield;
 import myoai.weapons.Sword;
+import myoai.weapons.Axe;
 
 import myoai.SpellType;
 import myoai.spells.Spell;
@@ -43,6 +44,7 @@ class Manager
 	{
 		Manager.weapons[WeaponType.Shield] = new Shield();
 		Manager.weapons[WeaponType.Sword] = new Sword();		
+		Manager.weapons[WeaponType.Axe] = new Axe();
 	} // initializeWeapons
 	
 	static private function initializeSpells() : Void

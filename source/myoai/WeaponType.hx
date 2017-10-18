@@ -7,4 +7,5 @@ enum WeaponType
 {
 	Shield;
 	Sword;
+	Axe;
 }

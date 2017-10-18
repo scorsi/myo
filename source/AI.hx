@@ -15,19 +15,36 @@ import myoai.weapons.Weapon;
 class AI 
 {
 	
+	var equiped : Bool;
+	
 	public function new()
 	{
 		// Do something at first stage
+		this.equiped = false;
 	}
 	
 	public function beginStage(stage:Int) : Void
 	{
-		// Do something at each new stage
+		// Do something at each stage begin
 	}
 	
 	public function playTurn() : ActionType
 	{
-		return ActionType.Wait;
+		if (Engine.getPlayer().getIsCasting())
+		{
+			return ActionType.Wait;
+		}
+		if (!equiped)
+		{
+			this.equiped = true;
+			return ActionType.Equip(Manager.getWeapon(WeaponType.Axe), null);
+		}
+		if (Engine.getPlayer().getHealth() < Engine.getPlayer().getMaxHealth() / 4)
+		{
+			if (Engine.getPlayer().canUseSpell(Manager.getSpell(SpellType.Heal)))
+				return ActionType.Cast(Manager.getSpell(SpellType.Heal), Engine.getPlayer());
+		}
+		return ActionType.Attack;
 	}
 	
 }

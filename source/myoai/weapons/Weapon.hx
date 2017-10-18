@@ -48,7 +48,7 @@ class Weapon
 	private function setTwoHanded(twoHanded:Bool) : Void			{ this.twoHanded = twoHanded; }
 	private function setCanDefend(canDefend:Bool) : Void			{ this.canDefend = canDefend; }
 	private function setDefendAmount(defendAmount:Int) : Void		{ this.defendAmount = defendAmount; }
-	
+
 	//////
 	// Getters
 	
@@ -57,5 +57,4 @@ class Weapon
 	public function isTwoHanded() : Bool							{ return this.twoHanded; }
 	public function getCanDefend() : Bool							{ return this.canDefend; }
 	public function getDefendAmount() : Int							{ return this.defendAmount; }
-	
 }
